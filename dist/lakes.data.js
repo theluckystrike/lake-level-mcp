@@ -1,0 +1,920 @@
+export const LAKES_DATA_AS_OF = '2026-10-30';
+export const LAKES = [
+    {
+        "slug": "lake-travis",
+        "name": "Lake Travis",
+        "state": "TX",
+        "river": "Colorado River",
+        "operator": "LCRA (Mansfield Dam)",
+        "fullPoolFt": 681,
+        "capacityAf": null,
+        "feed": {
+            "type": "usgs",
+            "site": "08154500",
+            "param": "00062"
+        },
+        "twdbName": "travis",
+        "seasonal": null,
+        "almanac": false
+    },
+    {
+        "slug": "lake-buchanan",
+        "name": "Lake Buchanan",
+        "state": "TX",
+        "river": "Colorado River",
+        "operator": "LCRA (Buchanan Dam)",
+        "fullPoolFt": 1020.5,
+        "capacityAf": null,
+        "feed": {
+            "type": "usgs",
+            "site": "08148000",
+            "param": "00062"
+        },
+        "twdbName": "buchanan",
+        "seasonal": null,
+        "almanac": false
+    },
+    {
+        "slug": "medina-lake",
+        "name": "Medina Lake",
+        "state": "TX",
+        "river": "Medina River",
+        "operator": "Bexar-Medina-Atascosa Counties WCID",
+        "fullPoolFt": 1064.2,
+        "capacityAf": null,
+        "feed": {
+            "type": "usgs",
+            "site": "08179500",
+            "param": "62614"
+        },
+        "twdbName": "medina",
+        "seasonal": null,
+        "almanac": true
+    },
+    {
+        "slug": "canyon-lake",
+        "name": "Canyon Lake",
+        "state": "TX",
+        "river": "Guadalupe River",
+        "operator": "USACE (Canyon Dam)",
+        "fullPoolFt": 909,
+        "capacityAf": null,
+        "feed": {
+            "type": "usgs",
+            "site": "08167700",
+            "param": "62614"
+        },
+        "twdbName": "canyon",
+        "seasonal": null,
+        "almanac": true
+    },
+    {
+        "slug": "lake-amistad",
+        "name": "Amistad Reservoir",
+        "state": "TX",
+        "river": "Rio Grande",
+        "operator": "IBWC / USBR (Amistad Dam)",
+        "fullPoolFt": 1117,
+        "capacityAf": null,
+        "feed": {
+            "type": "twdb",
+            "site": "amistad"
+        },
+        "twdbName": null,
+        "seasonal": null,
+        "almanac": false
+    },
+    {
+        "slug": "falcon-lake",
+        "name": "Falcon Reservoir",
+        "state": "TX",
+        "river": "Rio Grande",
+        "operator": "IBWC (Falcon Dam)",
+        "fullPoolFt": 301.2,
+        "capacityAf": null,
+        "feed": {
+            "type": "twdb",
+            "site": "falcon"
+        },
+        "twdbName": null,
+        "seasonal": null,
+        "almanac": false
+    },
+    {
+        "slug": "lake-belton",
+        "name": "Lake Belton",
+        "state": "TX",
+        "river": "Leon River",
+        "operator": "USACE (Belton Dam)",
+        "fullPoolFt": 594,
+        "capacityAf": null,
+        "feed": {
+            "type": "usgs",
+            "site": "08102000",
+            "param": "62614"
+        },
+        "twdbName": "belton",
+        "seasonal": null,
+        "almanac": true
+    },
+    {
+        "slug": "lake-georgetown",
+        "name": "Lake Georgetown",
+        "state": "TX",
+        "river": "North Fork San Gabriel River",
+        "operator": "USACE (Georgetown Dam)",
+        "fullPoolFt": 791,
+        "capacityAf": null,
+        "feed": {
+            "type": "twdb",
+            "site": "georgetown"
+        },
+        "twdbName": null,
+        "seasonal": null,
+        "almanac": false
+    },
+    {
+        "slug": "lake-somerville",
+        "name": "Lake Somerville",
+        "state": "TX",
+        "river": "Yegua Creek",
+        "operator": "USACE (Somerville Dam)",
+        "fullPoolFt": 238,
+        "capacityAf": 160000,
+        "feed": {
+            "type": "usgs",
+            "site": "08109900",
+            "param": "62614"
+        },
+        "twdbName": "somerville",
+        "seasonal": null,
+        "almanac": true
+    },
+    {
+        "slug": "lake-brownwood",
+        "name": "Lake Brownwood",
+        "state": "TX",
+        "river": "Pecan Bayou",
+        "operator": "Brown County Water Improvement District",
+        "fullPoolFt": 1425,
+        "capacityAf": null,
+        "feed": {
+            "type": "twdb",
+            "site": "brownwood"
+        },
+        "twdbName": null,
+        "seasonal": null,
+        "almanac": false
+    },
+    {
+        "slug": "lake-fork",
+        "name": "Lake Fork Reservoir",
+        "state": "TX",
+        "river": "Sabine River (Lake Fork Creek)",
+        "operator": "Sabine River Authority",
+        "fullPoolFt": 403,
+        "capacityAf": null,
+        "feed": {
+            "type": "usgs",
+            "site": "08018800",
+            "param": "62614"
+        },
+        "twdbName": "fork",
+        "seasonal": null,
+        "almanac": true
+    },
+    {
+        "slug": "lake-lbj",
+        "name": "Lake LBJ",
+        "state": "TX",
+        "river": "Colorado River",
+        "operator": "LCRA (Wirtz Dam)",
+        "fullPoolFt": 825,
+        "capacityAf": null,
+        "feed": {
+            "type": "twdb",
+            "site": "lyndon-b-johnson"
+        },
+        "twdbName": null,
+        "seasonal": null,
+        "almanac": false
+    },
+    {
+        "slug": "lake-whitney",
+        "name": "Lake Whitney",
+        "state": "TX",
+        "river": "Brazos River",
+        "operator": "USACE (Whitney Dam)",
+        "fullPoolFt": 533,
+        "capacityAf": null,
+        "feed": {
+            "type": "usgs",
+            "site": "08092500",
+            "param": "62614"
+        },
+        "twdbName": "whitney",
+        "seasonal": null,
+        "almanac": true
+    },
+    {
+        "slug": "oh-ivie-lake",
+        "name": "O.H. Ivie Reservoir",
+        "state": "TX",
+        "river": "Colorado River (Concho)",
+        "operator": "Colorado River Municipal Water District",
+        "fullPoolFt": 1551.5,
+        "capacityAf": null,
+        "feed": {
+            "type": "twdb",
+            "site": "o-h-ivie"
+        },
+        "twdbName": null,
+        "seasonal": null,
+        "almanac": false
+    },
+    {
+        "slug": "lake-mead",
+        "name": "Lake Mead",
+        "state": "NV",
+        "river": "Colorado River",
+        "operator": "USBR (Hoover Dam)",
+        "fullPoolFt": 1229,
+        "capacityAf": 28945000,
+        "feed": {
+            "type": "usbr",
+            "site": "Lake Mead",
+            "elevItem": 6123,
+            "storageItem": 6124
+        },
+        "twdbName": null,
+        "seasonal": null,
+        "almanac": false
+    },
+    {
+        "slug": "lake-powell",
+        "name": "Lake Powell",
+        "state": "UT",
+        "river": "Colorado River",
+        "operator": "USBR (Glen Canyon Dam)",
+        "fullPoolFt": 3700,
+        "capacityAf": null,
+        "feed": {
+            "type": "usgs",
+            "site": "09379900",
+            "param": "62614"
+        },
+        "twdbName": null,
+        "seasonal": null,
+        "almanac": true
+    },
+    {
+        "slug": "lake-mohave",
+        "name": "Lake Mohave",
+        "state": "NV",
+        "river": "Colorado River",
+        "operator": "USBR (Davis Dam)",
+        "fullPoolFt": 647,
+        "capacityAf": 1810000,
+        "feed": {
+            "type": "usbr",
+            "site": "Lake Mohave",
+            "elevItem": 6133,
+            "storageItem": 6134
+        },
+        "twdbName": null,
+        "seasonal": null,
+        "almanac": false
+    },
+    {
+        "slug": "lake-havasu",
+        "name": "Lake Havasu",
+        "state": "AZ",
+        "river": "Colorado River",
+        "operator": "USBR (Parker Dam)",
+        "fullPoolFt": 450,
+        "capacityAf": 648000,
+        "feed": {
+            "type": "usbr",
+            "site": "Lake Havasu",
+            "elevItem": 6128,
+            "storageItem": 6129
+        },
+        "twdbName": null,
+        "seasonal": null,
+        "almanac": false
+    },
+    {
+        "slug": "lake-shasta",
+        "name": "Shasta Lake",
+        "state": "CA",
+        "river": "Sacramento River",
+        "operator": "USBR (Shasta Dam)",
+        "fullPoolFt": 1067,
+        "capacityAf": 4552000,
+        "feed": {
+            "type": "cdec",
+            "site": "SHA"
+        },
+        "twdbName": null,
+        "seasonal": null,
+        "almanac": true
+    },
+    {
+        "slug": "lake-oroville",
+        "name": "Lake Oroville",
+        "state": "CA",
+        "river": "Feather River",
+        "operator": "CA DWR (Oroville Dam)",
+        "fullPoolFt": 901,
+        "capacityAf": 3537577,
+        "feed": {
+            "type": "cdec",
+            "site": "ORO"
+        },
+        "twdbName": null,
+        "seasonal": null,
+        "almanac": true
+    },
+    {
+        "slug": "lake-berryessa",
+        "name": "Lake Berryessa",
+        "state": "CA",
+        "river": "Putah Creek",
+        "operator": "USBR / Solano Project (Monticello Dam)",
+        "fullPoolFt": 440,
+        "capacityAf": 1522777,
+        "feed": {
+            "type": "cdec",
+            "site": "BER"
+        },
+        "twdbName": null,
+        "seasonal": null,
+        "almanac": true
+    },
+    {
+        "slug": "folsom-lake",
+        "name": "Folsom Lake",
+        "state": "CA",
+        "river": "American River",
+        "operator": "USBR (Folsom Dam)",
+        "fullPoolFt": 466,
+        "capacityAf": 977000,
+        "feed": {
+            "type": "cdec",
+            "site": "FOL"
+        },
+        "twdbName": null,
+        "seasonal": null,
+        "almanac": true
+    },
+    {
+        "slug": "lake-lanier",
+        "name": "Lake Lanier",
+        "state": "GA",
+        "river": "Chattahoochee River",
+        "operator": "USACE Mobile (Buford Dam)",
+        "fullPoolFt": 1071,
+        "capacityAf": null,
+        "feed": {
+            "type": "usgs",
+            "site": "02334400",
+            "param": "00062"
+        },
+        "twdbName": null,
+        "seasonal": {
+            "name": "top of conservation pool (guide curve)",
+            "agency": "USACE Mobile District",
+            "interp": "linear",
+            "points": [
+                [
+                    "04-15",
+                    1070
+                ],
+                [
+                    "05-01",
+                    1071
+                ],
+                [
+                    "10-01",
+                    1071
+                ],
+                [
+                    "12-01",
+                    1070
+                ]
+            ],
+            "source": "https://cwms-data.usace.army.mil/cwms-data/levels?office=SAM&level-id-mask=Buford.Elev.Inst.0.Top%20of%20Conservation&unit=EN&format=json&begin=2026-01-01T00:00:00Z&end=2026-12-31T23:59:00Z"
+        },
+        "almanac": false
+    },
+    {
+        "slug": "lake-allatoona",
+        "name": "Lake Allatoona",
+        "state": "GA",
+        "river": "Etowah River",
+        "operator": "USACE (Allatoona Dam)",
+        "fullPoolFt": 840,
+        "capacityAf": null,
+        "feed": {
+            "type": "usgs",
+            "site": "02393500",
+            "param": "62614"
+        },
+        "twdbName": null,
+        "seasonal": {
+            "name": "top of conservation pool (guide curve)",
+            "agency": "USACE Mobile District",
+            "interp": "linear",
+            "points": [
+                [
+                    "01-15",
+                    823
+                ],
+                [
+                    "05-02",
+                    840
+                ],
+                [
+                    "09-01",
+                    840
+                ],
+                [
+                    "10-02",
+                    835
+                ],
+                [
+                    "11-15",
+                    835
+                ],
+                [
+                    "12-31",
+                    823
+                ]
+            ],
+            "source": "https://cwms-data.usace.army.mil/cwms-data/levels?office=SAM&level-id-mask=Allatoona.Elev.Inst.0.Top%20of%20Conservation&unit=EN&format=json&begin=2026-01-01T00:00:00Z&end=2026-12-31T23:59:00Z"
+        },
+        "almanac": true
+    },
+    {
+        "slug": "lake-texoma",
+        "name": "Lake Texoma",
+        "state": "OK",
+        "river": "Red River",
+        "operator": "USACE Tulsa (Denison Dam)",
+        "fullPoolFt": 617,
+        "capacityAf": null,
+        "feed": {
+            "type": "cwms",
+            "office": "SWT",
+            "site": "DENI.Elev.Inst.1Hour.0.Ccp-Rev"
+        },
+        "twdbName": null,
+        "seasonal": {
+            "name": "seasonal top of conservation pool",
+            "agency": "USACE Tulsa District",
+            "interp": "linear",
+            "points": [
+                [
+                    "02-14",
+                    615
+                ],
+                [
+                    "05-01",
+                    615
+                ],
+                [
+                    "06-01",
+                    619
+                ],
+                [
+                    "07-15",
+                    619
+                ],
+                [
+                    "08-20",
+                    617
+                ],
+                [
+                    "09-10",
+                    616.5
+                ],
+                [
+                    "10-01",
+                    616.5
+                ],
+                [
+                    "11-01",
+                    618.5
+                ],
+                [
+                    "12-01",
+                    618.5
+                ]
+            ],
+            "source": "https://cwms-data.usace.army.mil/cwms-data/levels?office=SWT&level-id-mask=DENI.Elev.Inst.0.Top%20of%20Conservation&unit=EN&format=json&begin=2026-01-01T00:00:00Z&end=2026-12-31T23:59:00Z"
+        },
+        "almanac": false
+    },
+    {
+        "slug": "lake-eufaula-ok",
+        "name": "Lake Eufaula",
+        "state": "OK",
+        "river": "Canadian River",
+        "operator": "USACE Tulsa (Eufaula Dam)",
+        "fullPoolFt": 585,
+        "capacityAf": null,
+        "feed": {
+            "type": "cwms",
+            "office": "SWT",
+            "site": "EUFA.Elev.Inst.1Hour.0.Ccp-Rev"
+        },
+        "twdbName": null,
+        "seasonal": null,
+        "almanac": false
+    },
+    {
+        "slug": "lake-oologah",
+        "name": "Lake Oologah",
+        "state": "OK",
+        "river": "Verdigris River",
+        "operator": "USACE Tulsa (Oologah Dam)",
+        "fullPoolFt": 638,
+        "capacityAf": null,
+        "feed": {
+            "type": "cwms",
+            "office": "SWT",
+            "site": "OOLO.Elev.Inst.1Hour.0.Ccp-Rev"
+        },
+        "twdbName": null,
+        "seasonal": null,
+        "almanac": false
+    },
+    {
+        "slug": "altus-lugert-lake",
+        "name": "Lake Altus-Lugert",
+        "state": "OK",
+        "river": "North Fork Red River",
+        "operator": "USACE (Altus Dam)",
+        "fullPoolFt": 1559,
+        "capacityAf": null,
+        "feed": {
+            "type": "cwms",
+            "office": "SWT",
+            "site": "ALTU.Elev.Inst.1Hour.0.Ccp-Rev"
+        },
+        "twdbName": null,
+        "seasonal": null,
+        "almanac": false
+    },
+    {
+        "slug": "wappapello-lake",
+        "name": "Wappapello Lake",
+        "state": "MO",
+        "river": "St. Francis River",
+        "operator": "USACE (Wappapello Dam)",
+        "fullPoolFt": 359.7,
+        "capacityAf": null,
+        "feed": {
+            "type": "cwms",
+            "office": "MVS",
+            "site": "Wappapello Lk-St Francis.Elev.Inst.30Minutes.0.lrgsShef-rev"
+        },
+        "twdbName": null,
+        "seasonal": {
+            "name": "seasonal rule curve",
+            "agency": "USACE St. Louis District",
+            "interp": "step",
+            "points": [
+                [
+                    "04-01",
+                    359.74
+                ],
+                [
+                    "12-15",
+                    354.74
+                ]
+            ],
+            "source": "https://cwms-data.usace.army.mil/cwms-data/levels?office=MVS&level-id-mask=Wappapello%20Lk-St%20Francis.Elev.Inst.0.Seasonal%20Rule%20Curve&unit=EN&format=json&begin=2026-01-01T00:00:00Z&end=2026-12-31T23:59:00Z"
+        },
+        "almanac": false
+    },
+    {
+        "slug": "kerr-lake",
+        "name": "Kerr Lake (Buggs Island)",
+        "state": "VA",
+        "river": "Roanoke River",
+        "operator": "USACE Wilmington (John H. Kerr Dam)",
+        "fullPoolFt": 300,
+        "capacityAf": null,
+        "feed": {
+            "type": "usgs",
+            "site": "02079490",
+            "param": "62614"
+        },
+        "twdbName": null,
+        "seasonal": null,
+        "almanac": false
+    },
+    {
+        "slug": "lake-jordan-nc",
+        "name": "Jordan Lake",
+        "state": "NC",
+        "river": "Haw River / New Hope Creek",
+        "operator": "USACE Wilmington (Jordan Dam)",
+        "fullPoolFt": 216,
+        "capacityAf": null,
+        "feed": {
+            "type": "usgs",
+            "site": "02098197",
+            "param": "62614"
+        },
+        "twdbName": null,
+        "seasonal": null,
+        "almanac": false
+    },
+    {
+        "slug": "high-rock-lake",
+        "name": "High Rock Lake",
+        "state": "NC",
+        "river": "Yadkin River",
+        "operator": "Alcoa / Cube Hydro (High Rock Dam)",
+        "fullPoolFt": 655,
+        "capacityAf": null,
+        "feed": null,
+        "twdbName": null,
+        "seasonal": null,
+        "almanac": false
+    },
+    {
+        "slug": "kentucky-lake",
+        "name": "Kentucky Lake",
+        "state": "KY",
+        "river": "Tennessee River",
+        "operator": "TVA (Kentucky Dam)",
+        "fullPoolFt": 359,
+        "capacityAf": null,
+        "feed": {
+            "type": "cwms",
+            "office": "LRN",
+            "site": "KYDK2-KENTUCKY.Elev-Pool.Inst.1Hour.0.tva-raw"
+        },
+        "twdbName": null,
+        "seasonal": {
+            "name": "guide curve",
+            "agency": "TVA",
+            "interp": "linear",
+            "points": [
+                [
+                    "03-30",
+                    354
+                ],
+                [
+                    "04-29",
+                    359
+                ],
+                [
+                    "06-30",
+                    359
+                ],
+                [
+                    "09-28",
+                    355
+                ],
+                [
+                    "11-26",
+                    354
+                ]
+            ],
+            "source": "https://cwms-data.usace.army.mil/cwms-data/timeseries?office=LRD&name=Kentucky-Lake.Elev.Inst.1Day.0.Guide%20Curve&unit=EN&format=json"
+        },
+        "almanac": false
+    },
+    {
+        "slug": "nolin-river-lake",
+        "name": "Nolin River Lake",
+        "state": "KY",
+        "river": "Nolin River",
+        "operator": "USACE Louisville (Nolin Dam)",
+        "fullPoolFt": 515,
+        "capacityAf": null,
+        "feed": {
+            "type": "usgs",
+            "site": "03310900",
+            "param": "62614"
+        },
+        "twdbName": null,
+        "seasonal": {
+            "name": "seasonal pool (bottom of the flood-control pool)",
+            "agency": "USACE Louisville District",
+            "interp": "linear",
+            "points": [
+                [
+                    "03-15",
+                    492
+                ],
+                [
+                    "04-15",
+                    515
+                ],
+                [
+                    "09-15",
+                    515
+                ],
+                [
+                    "10-15",
+                    513
+                ],
+                [
+                    "12-01",
+                    492
+                ]
+            ],
+            "source": "https://cwms-data.usace.army.mil/cwms-data/levels?office=LRL&level-id-mask=Nolin.Elev.Inst.0.Bottom%20of%20Flood%20Control&unit=EN&format=json&begin=2026-01-01T00:00:00Z&end=2026-12-31T23:59:00Z"
+        },
+        "almanac": false
+    },
+    {
+        "slug": "lewis-smith-lake",
+        "name": "Lewis Smith Lake",
+        "state": "AL",
+        "river": "Sipsey Fork (Black Warrior River)",
+        "operator": "TVA / Alabama Power",
+        "fullPoolFt": 510,
+        "capacityAf": null,
+        "feed": {
+            "type": "cwms",
+            "office": "SAM",
+            "site": "Smith.Elev.Inst.1Hour.0.Raw-APCO"
+        },
+        "twdbName": null,
+        "seasonal": {
+            "name": "guide curve",
+            "agency": "Alabama Power",
+            "interp": "linear",
+            "points": [
+                [
+                    "02-01",
+                    496
+                ],
+                [
+                    "04-01",
+                    510
+                ],
+                [
+                    "07-01",
+                    510
+                ],
+                [
+                    "12-01",
+                    496
+                ]
+            ],
+            "source": "https://cwms-data.usace.army.mil/cwms-data/timeseries?office=SAM&name=Smith.Elev.Inst.1Hour.0.GC-APCO&unit=EN&format=json"
+        },
+        "almanac": false
+    },
+    {
+        "slug": "toledo-bend",
+        "name": "Toledo Bend Reservoir",
+        "state": "TX",
+        "river": "Sabine River",
+        "operator": "Sabine River Authority (Toledo Bend Dam)",
+        "fullPoolFt": 172,
+        "capacityAf": null,
+        "feed": {
+            "type": "twdb",
+            "site": "toledo-bend"
+        },
+        "twdbName": null,
+        "seasonal": null,
+        "almanac": false
+    },
+    {
+        "slug": "pine-flat-lake",
+        "name": "Pine Flat Lake",
+        "state": "CA",
+        "river": "Kings River",
+        "operator": "USACE (Pine Flat Dam)",
+        "fullPoolFt": 970,
+        "capacityAf": 1000000,
+        "feed": {
+            "type": "cdec",
+            "site": "PNF"
+        },
+        "twdbName": null,
+        "seasonal": null,
+        "almanac": true
+    },
+    {
+        "slug": "lake-isabella",
+        "name": "Lake Isabella",
+        "state": "CA",
+        "river": "Kern River",
+        "operator": "USACE (Isabella Dam)",
+        "fullPoolFt": 2573,
+        "capacityAf": 568075,
+        "feed": {
+            "type": "cdec",
+            "site": "ISB"
+        },
+        "twdbName": null,
+        "seasonal": null,
+        "almanac": true
+    },
+    {
+        "slug": "millerton-lake",
+        "name": "Millerton Lake",
+        "state": "CA",
+        "river": "San Joaquin River",
+        "operator": "USBR (Friant Dam)",
+        "fullPoolFt": 580,
+        "capacityAf": 520528,
+        "feed": {
+            "type": "cdec",
+            "site": "MIL"
+        },
+        "twdbName": null,
+        "seasonal": null,
+        "almanac": true
+    },
+    {
+        "slug": "new-melones-lake",
+        "name": "New Melones Lake",
+        "state": "CA",
+        "river": "Stanislaus River",
+        "operator": "USBR (New Melones Dam)",
+        "fullPoolFt": 1088,
+        "capacityAf": 2400000,
+        "feed": {
+            "type": "cdec",
+            "site": "NML"
+        },
+        "twdbName": null,
+        "seasonal": null,
+        "almanac": true
+    },
+    {
+        "slug": "don-pedro-lake",
+        "name": "Don Pedro Reservoir",
+        "state": "CA",
+        "river": "Tuolumne River",
+        "operator": "Turlock/Modesto Irrigation District (Don Pedro Dam)",
+        "fullPoolFt": 830,
+        "capacityAf": 2030000,
+        "feed": {
+            "type": "cdec",
+            "site": "DNP"
+        },
+        "twdbName": null,
+        "seasonal": null,
+        "almanac": true
+    },
+    {
+        "slug": "san-luis-reservoir",
+        "name": "San Luis Reservoir",
+        "state": "CA",
+        "river": "Offstream (California Aqueduct)",
+        "operator": "USBR / CA DWR (San Luis Dam)",
+        "fullPoolFt": 543,
+        "capacityAf": 2041000,
+        "feed": {
+            "type": "cdec",
+            "site": "SNL"
+        },
+        "twdbName": null,
+        "seasonal": null,
+        "almanac": true
+    },
+    {
+        "slug": "lake-cachuma",
+        "name": "Cachuma Lake",
+        "state": "CA",
+        "river": "Santa Ynez River",
+        "operator": "USBR (Bradbury Dam)",
+        "fullPoolFt": 753,
+        "capacityAf": 193305,
+        "feed": {
+            "type": "cdec",
+            "site": "CCH"
+        },
+        "twdbName": null,
+        "seasonal": null,
+        "almanac": true
+    },
+    {
+        "slug": "lake-casitas",
+        "name": "Casitas Reservoir",
+        "state": "CA",
+        "river": "Coyote Creek (offstream)",
+        "operator": "Casitas Municipal Water District",
+        "fullPoolFt": 567.5,
+        "capacityAf": 254000,
+        "feed": {
+            "type": "cdec",
+            "site": "CSI"
+        },
+        "twdbName": null,
+        "seasonal": null,
+        "almanac": false
+    }
+];

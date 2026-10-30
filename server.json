@@ -1,0 +1,10 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.theluckystrike/lake-level-mcp",
+  "title": "Lake Level MCP",
+  "description": "Live US lake and reservoir water levels from USGS, USACE, CDEC, USBR and TWDB gauges.",
+  "version": "1.0.0",
+  "websiteUrl": "https://lakelevelnow.com",
+  "repository": { "url": "https://github.com/theluckystrike/lake-level-mcp", "source": "github" },
+  "remotes": [{ "type": "streamable-http", "url": "https://lake-level-mcp.lipmichal.workers.dev/mcp" }]
+}
