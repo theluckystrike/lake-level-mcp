@@ -428,7 +428,7 @@ export function buildLevel(lake, r, nowMs) {
     if (below != null)
         parts.push(Math.abs(below) < 0.05 ? `That is at full pool (${fmt(lake.fullPoolFt, 1)} ft).` : `That is ${fmt(Math.abs(below))} ft ${below > 0 ? 'below' : 'above'} full pool (${fmt(lake.fullPoolFt, 1)} ft).`);
     if (seasonal)
-        parts.push(`The ${seasonal.agency} ${seasonal.name} for this date is ${fmt(seasonal.target_ft)} ft, so the lake is ${signed(seasonal.ft_vs_target)} against its seasonal target.`);
+        parts.push(`The ${seasonal.agency} ${seasonal.name} for this date is ${fmt(seasonal.target_ft)} ft, so the lake is ${Math.abs(seasonal.ft_vs_target) < 0.05 ? 'on' : `${fmt(Math.abs(seasonal.ft_vs_target))} ft ${seasonal.ft_vs_target > 0 ? 'above' : 'below'}`} its seasonal target.`);
     if (r.pctFull != null)
         parts.push(`It is ${r.pctFull}% full (${r.pctSource}).`);
     const ch = [h24 != null ? `${signed(h24)} in 24 h` : null, d7 != null ? `${signed(d7)} in 7 days` : null, d30 != null ? `${signed(d30)} in 30 days` : null].filter(Boolean);
