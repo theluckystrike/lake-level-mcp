@@ -41,7 +41,7 @@ claude mcp add --transport http lake-level https://lake-level-mcp.lipmichal.work
 Or run it locally over stdio:
 
 ```
-claude mcp add lake-level -- npx -y github:theluckystrike/lake-level-mcp
+claude mcp add lake-level -- npx -y lake-level-mcp
 ```
 
 ### Claude Desktop
@@ -51,7 +51,7 @@ Add to `claude_desktop_config.json`:
 ```json
 {
   "mcpServers": {
-    "lake-level": { "command": "npx", "args": ["-y", "github:theluckystrike/lake-level-mcp"] }
+    "lake-level": { "command": "npx", "args": ["-y", "lake-level-mcp"] }
   }
 }
 ```
