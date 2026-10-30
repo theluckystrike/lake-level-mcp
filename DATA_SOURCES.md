@@ -7,7 +7,7 @@ lakelevelnow.com data files. Fetch dates are the dates each source was fetched a
 
 | Agency | Endpoint | Used for | Fetched |
 | --- | --- | --- | --- |
-| USGS | https://waterservices.usgs.gov/nwis/iv/?format=rdb&sites=08154500&parameterCd=00062&period=P31D | Instantaneous reservoir elevation (parameters 62614, 00062) for 14 lakes | 2026-10-30 |
+| USGS | https://waterservices.usgs.gov/nwis/iv/?format=rdb&sites=08154500&parameterCd=62614,00062&period=P31D | Instantaneous reservoir elevation (parameters 62614 and 00062, the bound one preferred) for 14 lakes | 2026-10-30 |
 | USGS | https://waterservices.usgs.gov/nwis/dv/?format=json&sites=09379900&parameterCd=62614&statCd=00003 | Daily mean elevation for history beyond 32 days | 2026-10-30 |
 | California DWR CDEC | https://cdec.water.ca.gov/dynamicapp/req/JSONDataServlet?Stations=SHA&SensorNums=6,15&dur_code=D | Daily elevation (sensor 6) and storage (sensor 15) for 12 California reservoirs | 2026-10-30 (fetched through Cloudflare's network; it timed out from the build machine) |
 | U.S. Bureau of Reclamation RISE | https://data.usbr.gov/rise/api/result?itemId=6123 | Daily elevation and storage for Lake Mead (6123/6124), Lake Mohave (6133/6134), Lake Havasu (6128/6129) | 2026-10-30 |
@@ -39,3 +39,5 @@ Read from the site source (`src/data/`) on 2026-10-30 by `scripts/build-lakes.mj
 - `rise-mead-elev-6123.json`, `rise-mead-storage-6124.json`: Reclamation RISE, Lake Mead.
 - `twdb-amistad-30day.csv`: TWDB, Amistad Reservoir.
 - `cwms-texoma-deni.json`: USACE CWMS, Lake Texoma (Denison Dam), 7 days hourly.
+- `usgs-iv-allatoona-02393500.rdb`: USGS IV, Lake Allatoona, 8 days (the gauge publishes 00062, the binding names 62614).
+- `twdb-travis-1year.csv`: TWDB, Lake Travis, 1 year.

@@ -158,3 +158,24 @@ test('compare_lakes: one gauge down does not fail the call; ranking by feet belo
   assert.equal(out.lakes.find((r) => r.slug === 'lake-texoma').ok, false);
   await assert.rejects(compareLakes(f, ['lake-mead'], NOW), /2 to 10/);
 });
+
+test('USGS binding names 62614 but the gauge publishes 00062 (Allatoona 02393500): parser picks the column with data', () => {
+  const pts = parseUsgsRdb(fx('usgs-iv-allatoona-02393500.rdb'), '62614');
+  assert.equal(pts.param, '00062');
+  assert.equal(pts.length, 764);
+  assert.deepEqual(pts.at(-1), { t: '2026-10-29T19:15:00-04:00', v: 833.38 });
+});
+
+test('365-day history for a USGS Texas lake without daily means uses the TWDB 1-year record (Travis)', async () => {
+  const f = offline({ 'nwis/iv': 'usgs-iv-travis-08154500.rdb', 'travis-1year': 'twdb-travis-1year.csv' });
+  const r = await fetchReading(f, lake('lake-travis'), 365, NOW);
+  assert.equal(r.agency, 'Texas Water Development Board');
+  const h = buildHistory(lake('lake-travis'), r, 365, 'daily', NOW);
+  assert.equal(h.points.length, 365);
+  assert.deepEqual(h.stats.first, { date: '2025-10-30', ft: 669.42 });
+  assert.deepEqual(h.stats.last, { date: '2026-10-29', ft: 677.12 });
+  assert.deepEqual(h.stats.min, { date: '2026-04-19', ft: 663.26 });
+  assert.deepEqual(h.stats.max, { date: '2026-07-19', ft: 684.71 });
+  assert.equal(h.stats.change_ft, 7.7);
+  assert.equal(buildHistory(lake('lake-travis'), r, 365, 'weekly', NOW).points.length, 53);
+});

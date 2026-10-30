@@ -96,35 +96,46 @@ const TZ_OFFSETS: Record<string, string> = {
   MST: '-07:00', MDT: '-06:00', PST: '-08:00', PDT: '-07:00', AKST: '-09:00', AKDT: '-08:00', HST: '-10:00',
 };
 
-/** USGS NWIS RDB (tab separated, '#' comments, header line, width line). Returns the first value column. */
-export function parseUsgsRdb(text: string): Point[] {
+/** USGS reservoir-elevation parameters: 62614 (ft above NGVD/NAVD) and 00062 (ft above datum). */
+export const USGS_ELEV_PARAMS = ['62614', '00062'];
+
+/**
+ * USGS NWIS RDB (tab separated, '#' comments, header line, width line). A gauge can carry both
+ * elevation parameters; the preferred one is used when it has values, else the other one with the
+ * most values (some bindings name 62614 while the gauge publishes 00062, as at Allatoona).
+ */
+export function parseUsgsRdb(text: string, prefer?: string): Point[] & { param?: string } {
   const lines = text.split('\n').filter((l) => l && !l.startsWith('#'));
   if (lines.length < 2) return [];
   const header = lines[0].split('\t');
   const iDt = header.indexOf('datetime');
   const iTz = header.indexOf('tz_cd');
-  const iVal = header.findIndex((h) => /^\d+_\d{5}$/.test(h));
-  if (iDt < 0 || iVal < 0) return [];
-  const out: Point[] = [];
-  for (const line of lines.slice(2)) {
-    const c = line.split('\t');
-    const v = Number(c[iVal]);
-    if (c[iVal] === '' || c[iVal] === undefined || !Number.isFinite(v) || v === -999999) continue;
+  const cols = header.map((h, i) => ({ i, m: /^\d+_(\d{5})$/.exec(h) })).filter((x) => x.m).map((x) => ({ i: x.i, param: x.m![1] }));
+  if (iDt < 0 || !cols.length) return [];
+  const rows = lines.slice(2).map((l) => l.split('\t'));
+  const good = (c: string[], i: number) => c[i] !== '' && c[i] !== undefined && Number.isFinite(Number(c[i])) && Number(c[i]) !== -999999;
+  const counted = cols.map((c) => ({ ...c, n: rows.filter((r) => good(r, c.i)).length })).filter((c) => c.n > 0);
+  if (!counted.length) return [];
+  const pick = counted.find((c) => c.param === prefer) ?? counted.sort((a, b) => b.n - a.n)[0];
+  const out: Point[] & { param?: string } = [];
+  for (const c of rows) {
+    if (!good(c, pick.i)) continue;
     const off = TZ_OFFSETS[(c[iTz] ?? '').trim()] ?? '+00:00';
     const dt = String(c[iDt]).trim();
     const t = /^\d{4}-\d{2}-\d{2} \d{2}:\d{2}$/.test(dt) ? `${dt.replace(' ', 'T')}:00${off}` : dt;
-    out.push({ t, v });
+    out.push({ t, v: Number(c[pick.i]) });
   }
+  out.param = pick.param;
   return out;
 }
 
-/** USGS NWIS daily values JSON (WaterML-JSON). Returns daily mean points. */
-export function parseUsgsDvJson(text: string): Point[] {
+/** USGS NWIS daily values JSON (WaterML-JSON). Returns daily mean points, preferring the given parameter. */
+export function parseUsgsDvJson(text: string, prefer?: string): Point[] {
   const d = JSON.parse(text);
-  const ts = d?.value?.timeSeries ?? [];
-  const mean = ts.find((t: any) => String(t?.name ?? '').endsWith(':00003')) ?? ts[0];
+  const ts = (d?.value?.timeSeries ?? []).filter((t: any) => String(t?.name ?? '').endsWith(':00003') && (t.values?.[0]?.value ?? []).length);
+  const mean = ts.find((t: any) => String(t.name).includes(`:${prefer}:`)) ?? ts[0];
   if (!mean) return [];
-  return (mean.values?.[0]?.value ?? [])
+  return (mean.values[0].value as any[])
     .map((p: any) => ({ t: String(p.dateTime).slice(0, 10), v: Number(p.value) }))
     .filter((p: Point) => Number.isFinite(p.v) && p.v !== -999999);
 }
@@ -282,16 +293,17 @@ function wrap(lake: Lake, feed: Feed, e: unknown): UpstreamError {
 }
 
 async function usgs(fetchText: FetchText, feed: Extract<Feed, { type: 'usgs' }>, days: number, nowMs: number, ttl: number) {
-  const ivUrl = `https://waterservices.usgs.gov/nwis/iv/?format=rdb&sites=${feed.site}&parameterCd=${feed.param}&siteStatus=all&period=P${days}D`;
+  const params = USGS_ELEV_PARAMS.join(',');
+  const ivUrl = `https://waterservices.usgs.gov/nwis/iv/?format=rdb&sites=${feed.site}&parameterCd=${params}&siteStatus=all&period=P${days}D`;
   if (days > 32) {
-    const dvUrl = `https://waterservices.usgs.gov/nwis/dv/?format=json&sites=${feed.site}&parameterCd=${feed.param}&statCd=00003&startDT=${ymd(nowMs - days * 86400000)}&endDT=${ymd(nowMs)}`;
+    const dvUrl = `https://waterservices.usgs.gov/nwis/dv/?format=json&sites=${feed.site}&parameterCd=${params}&statCd=00003&startDT=${ymd(nowMs - days * 86400000)}&endDT=${ymd(nowMs)}`;
     try {
-      const pts = parseUsgsDvJson(await fetchText(dvUrl, { timeoutMs: TIMEOUT, cacheTtl: ttl }));
-      if (pts.length) return { series: pts, dataUrl: dvUrl, param: `${feed.param} daily mean` };
+      const pts = parseUsgsDvJson(await fetchText(dvUrl, { timeoutMs: TIMEOUT, cacheTtl: ttl }), feed.param);
+      if (pts.length) return { series: pts, dataUrl: dvUrl, param: 'daily mean reservoir elevation', kind: 'dv' as const };
     } catch { /* fall through to instantaneous values */ }
   }
-  const pts = parseUsgsRdb(await fetchText(ivUrl, { accept: 'text/plain', timeoutMs: TIMEOUT, cacheTtl: ttl }));
-  return { series: pts, dataUrl: ivUrl, param: feed.param };
+  const pts = parseUsgsRdb(await fetchText(ivUrl, { accept: 'text/plain', timeoutMs: TIMEOUT, cacheTtl: ttl }), feed.param);
+  return { series: pts as Point[], dataUrl: ivUrl, param: `${pts.param ?? feed.param} reservoir elevation`, kind: 'iv' as const };
 }
 
 /** Fetch a lake's series covering at least `days` days. Throws UpstreamError with a plain message. */
@@ -306,6 +318,11 @@ export async function fetchReading(fetchText: FetchText, lake: Lake, days: numbe
       try {
         const r = await usgs(fetchText, feed, days, nowMs, ttl);
         if (!r.series.length) throw new Error('empty series');
+        // USGS keeps about 120 days of instantaneous values. When a long history had to come from
+        // them (no daily means), a Texas lake's TWDB daily record covers the full year instead.
+        if (days > 32 && r.kind === 'iv' && lake.twdbName && ms(r.series[0].t) > nowMs - (days - 3) * 86400000) {
+          try { return await twdb(fetchText, lake.twdbName, days, ttl, null); } catch { /* keep the shorter USGS record */ }
+        }
         return {
           series: r.series, storage: [], pctFull: null, pctSource: null, agency: 'USGS', gaugeId: feed.site, param: r.param,
           sourceUrl: `https://waterdata.usgs.gov/monitoring-location/USGS-${feed.site}/`, dataUrl: r.dataUrl,
