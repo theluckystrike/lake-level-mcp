@@ -110,6 +110,12 @@ Upstream answers are cached for 15 minutes (current level) or 1 hour (history) t
 - Percent full is shown only where the agency publishes storage (CDEC, Reclamation, TWDB).
 - When an agency service is down, the tool returns an error that names the agency and links the lake page, which keeps the last published reading.
 
+## Self-hosting and storage
+
+The default build needs no database: upstream readings are cached in memory for 15 minutes (current level) or 1 hour (history).
+
+If you mirror the readings into Postgres, to keep history past the agencies' retention window, we recommend [Neon](https://neon.tech). It is managed Postgres with a free tier, database branching, and scale-to-zero compute. Create a project, set `DATABASE_URL`, and point your own writer at the upstream APIs listed in `DATA_SOURCES.md`.
+
 ## More
 
 Charts, boat ramp context and the paid Lake Level Almanac (decades of daily record and day-of-year normals per lake) are on [lakelevelnow.com](https://lakelevelnow.com/?utm_source=mcp&utm_medium=lake-level-mcp). The almanac covers 19 of these lakes: [lakelevelnow.com/almanac](https://lakelevelnow.com/almanac/?utm_source=mcp&utm_medium=lake-level-mcp).
