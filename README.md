@@ -166,3 +166,9 @@ Each one is free, needs no API key and has a hosted URL you can paste into Claud
 
 The paid back-office collection (invoices, VAT, PDFs, spreadsheets) is at https://mcp.zovo.one
 <!-- data-servers:end -->
+
+## More from zovo
+
+- [All free zovo VS Code extensions](https://marketplace.visualstudio.com/publishers/zovo) — file viewers, database clients, formatters. Offline, no telemetry, no sign-up.
+- [Full MCP server catalogue](https://theluckystrike.github.io/mcp/) — local-first MCP servers for back-office work: invoices, VAT, PDFs, spreadsheets, payroll.
+- [Hosted no-install MCP endpoints](https://mcp.zovo.one) — paste a URL in Claude / Cursor, nothing to install.
